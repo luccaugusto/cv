@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script src="https://kit.fontawesome.com/25199d3d0f.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: rgb(40, 40, 40);
+            font-family: sans-serif;
+        }
+        /* Link styling with subtle visual hints to indicate clickability */
+        a {
+            text-decoration: none;
+            color: #2a2a2a;
+            border-bottom: 1px dotted #6a6a6a;
+            transition: border-bottom-color 0.2s ease, color 0.2s ease;
+        }
+        /* Hover effect to make links more interactive */
+        a:hover {
+            color: #1a1a1a;
+            border-bottom-color: #4a4a4a;
+        }
+        /* A4 page container with exact height for proper pagination */
+        .page-container {
+            width: 210mm;
+            height: 297mm;
+            padding: 5mm 10mm;
+            margin: 10mm auto;
+            border: 1px #D3D3D3 solid;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+        /* Print media query for proper page breaks when printing */
+        @media print {
+            body {
+                background: white;
+            }
+            .page-container {
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page-container:last-child {
+                page-break-after: auto;
+            }
+            /* Ensure proficiency circles are visible and properly sized when printing */
+            .proficiency-circles .circle {
+                display: inline-block !important;
+                width: 13px !important;
+                height: 13px !important;
+                min-width: 13px !important;
+                min-height: 13px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure filled circles maintain their color when printing */
+            .proficiency-circles[data-level="1"] .circle:nth-child(-n+1),
+            .proficiency-circles[data-level="2"] .circle:nth-child(-n+2),
+            .proficiency-circles[data-level="3"] .circle:nth-child(-n+3),
+            .proficiency-circles[data-level="4"] .circle:nth-child(-n+4),
+            .proficiency-circles[data-level="5"] .circle:nth-child(-n+5) {
+                background-color: #4a4a4a !important;
+                border-color: #4a4a4a !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px 15px;
+            font-size: 12px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        .item i {
+            margin-right: 5px;
+        }
+        .icon {
+            color: #3b454a;
+        }
+        .cv-body {
+            display: flex;
+            width: 100%;
+        }
+        .content {
+            flex: 5.5;
+            padding-right: 25pt;
+        }
+        .sidebar {
+            flex: 3.5;
+        }
+        .section-header {
+            font-size: 28px;
+            font-weight: 600;
+            color: #5b5b5b;
+            border-bottom: 3px solid #5b5b5b;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            line-height: 0.8;
+        }
+        .description {
+            text-align: justify;
+        }
+        .subtitle {
+            font-weight: 550;
+            color: #4a4a4a;
+            font-size: 14px;
+        }
+        .pill-list {
+            font-weight: 500;
+            color: #4a4a4a;
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .pill-list li {
+            border-radius: 5px;
+            padding: 3px 6px;
+            font-size: 12px;
+            border: 1px solid #b8b8b8;
+        }
+        .skill-list {
+            margin-top: 8px;
+        }
+        .skill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .skill-name {
+            color: #4a4a4a;
+            font-weight: 600;
+        }
+        .proficiency-circles {
+            display: flex;
+            gap: 4px;
+        }
+        /* Circle styling with explicit display and print-friendly properties */
+        .proficiency-circles .circle {
+            width: 13px;
+            height: 13px;
+            min-width: 13px;
+            min-height: 13px;
+            border-radius: 50%;
+            background-color: #d0d0d0;
+            display: inline-block;
+            /* Ensure colors print correctly */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            /* Add border to ensure visibility even if background doesn't print */
+            border: 1px solid #d0d0d0;
+            box-sizing: border-box;
+        }
+        /* Filled circle style - applied based on data-level attribute */
+        /* Ensure filled circles print correctly with explicit color adjustment */
+        .proficiency-circles[data-level="1"] .circle:nth-child(-n+1),
+        .proficiency-circles[data-level="2"] .circle:nth-child(-n+2),
+        .proficiency-circles[data-level="3"] .circle:nth-child(-n+3),
+        .proficiency-circles[data-level="4"] .circle:nth-child(-n+4),
+        .proficiency-circles[data-level="5"] .circle:nth-child(-n+5) {
+            background-color: #4a4a4a;
+            border-color: #4a4a4a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .position {
+            font-size: 18px;
+            color: #404040;
+            font-weight: 600;
+        }
+        .location {
+            font-size: 16px;
+            color: #5a5a5a;
+        }
+        .date {
+            color: #6a6a6a;
+            font-size: 16px;
+        }
+        .split-list {
+            columns: 2;
+            column-gap: 1rem;
+            list-style: disc;
+            padding-left: 1.2rem;
+            margin: 0;
+            font-size: 18px;
+        }
+        .experience-block {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px dashed #d0d0d0;
+        }
+        .time-location {
+            display: flex;
+            gap: 15px;
+            margin-top: 4px;
+            font-size: 14px;
+            justify-content: space-between;
+        }
+    </style>
+    <title>Lucca Augusto</title>
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-container">
+        <div class="header">
+            <h1 style="margin-bottom: 12px; font-weight: 600">LUCCA AUGUSTO MOREIRA SANTOS</h1>
+            <div class="contact-info">
+                <div class="item">
+                    <a href="mailto:lucca@luccaaugusto.xyz">
+                        <i class="fa-solid fa-at icon"></i>lucca@luccaaugusto.xyz
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="https://github.com/luccaugusto">
+                        <i class="fa-brands fa-github"></i>github.com/luccaugusto
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="https://www.linkedin.com/in/luccaugusto/">
+                        <i class="fa-brands fa-linkedin-in"></i>linkedin.com/in/luccaugusto
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="https://dev.luccaaugusto.xyz">
+                        <i class="fa-solid fa-link"></i>https://dev.luccaaugusto.xyz
+                    </a>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-location-dot"></i>Belo Horizonte, MG, Brasil
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-cake-candles"></i>28/05/1999
+                </div>
+            </div>
+        </div>
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">RESUMO DE CARREIRA</h1>
+                <p class="description">
+                    <b>Engenheiro de Software com habilidades gerais</b> experiente
+                    em trabalhar com metodologias Agile, responsável por desenvolver e
+                    manter soluções que dão base às equipes de marketing, business e
+                    tecnologia, conseguindo antecipar problemas de crescimento,
+                    necessidades executivas e desenvolver soluções que deêm autonomia a
+                    todos os times possibilitando maior agilidade nas mudanças e
+                    crescimento em qualquer parte do projeto. Experiência em Node.Js,
+                    React, Python, PHP, Java, Javascript, SQL, HTML, CSS, Django,
+                    Wordpress, C, Git, DevOps e serviços AWS.
+                </p>
+                <h1 class="section-header">EXPERIÊNCIA PROFISSIONAL</h1>
+                    <div class="experience-block">
+                        <span class="position">Engenheiro de Software Full Stack</span>
+                        <span class="company"><a href="https://roadwayai.com">RoadwayAI</a> através da <a href="https://nacif.xyz">NacifIT</a></span>
+                        <div class="time-location">
+                            <span class="date"><i class="fa-regular fa-calendar-days"></i>Fev 2024 - Presente</span>
+                            <span class="location"><i class="fa-solid fa-location-dot"></i>San Francisco-CA, US (Remoto)</span>
+                        </div>
+                        <p class="description">
+                            A RoadwayAI é uma startup de analytics e automação para Growth Marketing,
+                            criada por Growth Marketers do Webflow e Notion, com o propósito de <b>automatizar a metrificação,
+                            modelagem e análise das métricas que realmente impulsionam o crescimento de empresas em escala</b>.
+                            Atuando como engenheiro de software full stack (alocado pela NacifIT) em um time enxuto de quatro
+                            engenheiros, trabalho no <b>desenvolvimento e manutenção de toda a plataforma</b>, abrangendo o Frontend
+                            (ReactJS) para construção de dashboards flexíveis, o Backend (Python FastAPI) responsável pela
+                            orquestração dos dados e gestão dos dashboards, além da modelagem e transformação de dados dos
+                            clientes utilizando SQL, dbt e uma camada semântica (<a href="https://cube.dev">Cube.dev</a>),
+                            abrangendo múltiplos bancos de dados (Postgres, Snowflake, BigQuery, ClickHouse e Redshift).
+                            O projeto possui uma <b>forte camada de Inteligência Artificial</b>, na qual conjuntos de dados previamente
+                            modelados e analisados estatisticamente são utilizados por LLMs para <b>gerar relatórios analíticos
+                            detalhados e acionáveis</b>. Destaco como contribuição principal o Attribution Manager, desenvolvido
+                            majoritariamente por mim, uma ferramenta que permite gerenciar regras complexas de atribuição de
+                            origem dos usuários com base em UTMs e histórico de navegação.
+                            Além disso, a <b>IA é utilizada de forma intensiva</b> tanto no produto final quanto no dia a dia do
+                            desenvolvimento, <b>apoiando análises, experimentação, observabilidade (Langfuse) e automações ao
+                            longo de todo o pipeline de dados</b>, incluindo integrações via ETL (Airbyte).
+                        </p>
+                    </div>
+            </div>
+            <div class="sidebar">
+                <h1 class="section-header">LINGUAGENS</h1>
+                <div>
+                    <span class="subtitle">De Máquina</span>
+                    <div class="pill-list">
+                        <li>C</li>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>PHP</li>
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>Shell</li>
+                        <li>Ruby</li>
+                        <li>SQL</li>
+                    </div>
+                </div>
+                <div>
+                    <span class="subtitle">Humanas</span>
+                    <div class="skill-list">
+                        <div class="skill-row">
+                            <span class="skill-name">Inglês (fluente)</span>
+                            <div class="proficiency-circles" data-level="5">
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Português (nativo)</span>
+                            <div class="proficiency-circles" data-level="5">
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                            </div>
+                        </div>
+                        <div class="skill-row">
+                            <span class="skill-name">Japonês (básico)</span>
+                            <div class="proficiency-circles" data-level="2">
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="section-header">HABILIDADES DE TECNOLOGIA</h1>
+                <div class="skill-list">
+                    <div class="skill-row">
+                        <span class="skill-name">Wordpress</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">SQL</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">Shell script</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">Linux</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">HTML</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">CSS</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">Git</span>
+                        <div class="proficiency-circles" data-level="5">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">ReactJS</span>
+                        <div class="proficiency-circles" data-level="4">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">Django</span>
+                        <div class="proficiency-circles" data-level="4">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">NodeJS</span>
+                        <div class="proficiency-circles" data-level="4">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">Ruby On Rails</span>
+                        <div class="proficiency-circles" data-level="3">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                    <div class="skill-row">
+                        <span class="skill-name">AWS</span>
+                        <div class="proficiency-circles" data-level="3">
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                            <span class="circle"></span>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="section-header">SOFT SKILLS</h1>
+                <div class="pill-list">
+                    <li>Comunicação</li>
+                    <li>Tenacidade</li>
+                    <li>Resolução de problemas</li>
+                    <li>Trabalho em equipe</li>
+                    <li>Criatividade</li>
+                    <li>Resiliência</li>
+                </div>
+                <h1 class="section-header">ESCOLARIDADE</h1>
+                <div style="display: flex; flex-direction: column; gap: 3px; margin-bottom: 12px;">
+                    <span class="position">Graduação em Ciência da Computação</span>
+                    <span class="location"><i class="fa-solid fa-location-dot"></i>PUC Minas</span>
+                    <span class="date"><i class="fa-regular fa-calendar-days"></i>Jan 2017 - Jun 2021</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 3px;">
+                    <span class="position">Curso Técnico em Administração</span>
+                    <span class="location"><i class="fa-solid fa-location-dot"></i>SEBRAE Contagem</span>
+                    <span class="date"><i class="fa-regular fa-calendar-days"></i>Jan 2014 - Dez 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page-container">
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">EXPERIÊNCIA PROFISSIONAL (cont.)</h1>
+                    <div class="experience-block">
+                        <span class="position">Engenheiro de Software Full Stack</span>
+                        <span class="company">CityShoppe</span>
+                        <div class="time-location">
+                            <span class="date"><i class="fa-regular fa-calendar-days"></i>Junho 2021 - Maio 2023 </span>
+                            <span class="location"><i class="fa-solid fa-location-dot"></i>Austin-TX, US (Remoto)</span>
+                        </div>
+                        <p class="description">
+                            CityShoppe é um marketplace para pequenos negócios nos EUA e
+                            Europa.
+                            Sendo a segunda pessoa no time eu era responsável por entender por
+                            completo o negócio e as tecnologias envolvidas, assim como <b>participar
+                            de todas as decisões de desenvolvimento e na resolução de problemas</b>.
+                            Eu também <b>participei ativamente na criação e desenvolvimento de
+                            todos os produtos da empresa</b>, desenvolvendo funcionalidades
+                            fundamentais e organizando a infraestrutura para garantir um sistema
+                            confiável e disponível. Esses esforços resultaram em mais de <b>200 mil
+                            dólares em investimento</b> para a empresa.
+                            <br/>
+                            Além disso,
+                            <ul>
+                                <li><b>Trabalhei com pessoas de 4 países diferentes no mesmo projeto</b>, desenvolvendo minhas habilidades de comunicação.</li>
+                                <li>Desenvolvi produtos em NodeJS, NestJS and PHP, usando serviços AWS (lambda, API gateway, ECS, EC2, etc) para infraestrutura.</li>
+                            <ul>
+                        </p>
+                    </div>
+                    <div class="experience-block">
+                        <span class="position">Engenheiro de Software Full Stack</span>
+                        <span class="company"><a href="https://educandoseubolso.blog.br">Educando Seu Bolso (https://https://educandoseubolso.blog.br)</a></span>
+                        <div class="time-location">
+                            <span class="date"><i class="fa-regular fa-calendar-days"></i>Ago 2017 – Jan 2019 / Ago 2019 - Jun 2020</span>
+                            <span class="location"><i class="fa-solid fa-location-dot"></i>BH-MG, Brasil</span>
+                        </div>
+                        <p class="description">
+                        Edutech financeira que conecta pessoas e empresas através de cursos,
+                        podcasts e ferramentas com um modelo de negócio por programas de afiliados e
+                        produtos digitais.
+                        Entrei para o time como estagiário e era responsável por <b>entender o
+                        negócio de uma perspectiva de tecnologia e contribuir na criação das
+                        ferramentas</b>. Criei uma plataforma em Django para gerenciar todos os
+                        dados e <b>melhorar nossas ferramentas, aumentando a eficiência dos
+                        times de marketing, comercial e tecnologia</b>, permitindo o negócio
+                        escalar mais rápido. Desenvolvi fortes habilidades de comunicação já
+                        que esse trabalho envolvia comunicação constante com o time comercial
+                        para traduzir a ideia do produto em uma ferramenta amigável ao usuário
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

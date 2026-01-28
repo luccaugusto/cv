@@ -1,0 +1,119 @@
+\documentclass[10pt,a4paper]{altacv}
+
+\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{ragged2e}
+
+\definecolor{black}{HTML}{000000}
+\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\colorlet{heading}{arsenic}
+\colorlet{accent}{arsenic}
+\colorlet{emphasis}{black}
+\colorlet{body}{LightGrey}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Lucca Augusto Moreira Santos}
+\personalinfo{%
+	% Not all of these are required!
+		% You can add your own with \printinfo{symbol}{detail}
+	\email{lucca@luccaaugusto.xyz}
+	\github{\href{https://github.com/luccaugusto}{github.com/luccaugusto}}
+	\linkedin{\href{https://www.linkedin.com/in/luccaugusto/}{linkedin.com/in/luccaugusto/}}
+        \homepage{\href{https://dev.luccaaugusto.xyz}{https://dev.luccaaugusto.xyz}}
+	\printinfo{}{age 24}
+	\location{Belo Horizone, MG, Brasil}
+}
+
+%% Make the header extend all the way to the right, if you want.
+\begin{fullwidth}
+\makecvheader
+
+\end{fullwidth}
+
+\cvsection[page1sidebar]{Career Summary}
+\justifying{
+{\large\color{black}\textbf{Software Engineer with generalist skills}} experienced in working with agile methodologies, responsible for developing and maintaining solutions to support business, marketing and technology teams, being able to anticipate scaling problems, executive needs and developing solutions that increase autonomy of all teams, allowing for quicker changes and improvements in any part of the project. Worked mostly with Wordpress and PHP. Experience with Node.Js, React, Python, PHP, Java, Javascript, SQL, HTML, CSS, Django, C, Git, NewRelic, DevOps and AWS products.}
+
+\cvsection{Areas of Experience}
+\begin{multicols}{2}
+\begin{itemize}
+\item Multidisciplinary Communication 
+\item Web development
+\item Agile Methodologies
+\item Software Engineering
+
+\end{itemize}
+\columnbreak
+\begin{itemize}
+\item Growth Hacking
+\item Startups, Edutech and Fintech
+\item Digital Products
+\item Analytical and Systemic View
+\end{itemize}
+\end{multicols}
+
+\cvsection{Professional Experience}
+
+\cvevent{Full Stack Software Engineer}{City Shoppe (https://cityshoppe.com)}{June 2021 - April 2023}{Austin-TX, US (remote)}
+CityShoppe is a digital marketplace startup for small businesses in the US and Europe.
+
+\justifying{As the second person in the dev team i was responsible for understanding everything about the business and tech stack, as well as \textbf{\color{black}participating in all the software decisions and solutions finding}. I also \textbf{\color{black}helped hands on building all the company's products}, developing key features and setting up infrastructure to make it reliable and available. These efforts resulted in \textbf{\color{black}raising over 200 thousand dollars in investment} for the company.
+Most of the project was built in Wordpress before we moved to a NestJS application.}
+\begin{itemize}
+        \item \textbf{\color{black}Worked with people from 4 different countries} in one project, further developing my communication skills
+	\item Developed products in NodeJS, NestJS and PHP, using AWS services (lambda, API gateway, ECS, EC2, etc) for infrastructure.
+\end{itemize}
+
+\divider
+
+
+\cvevent{Full Stack Software Engineer}{Educando Seu Bolso (https://educandoseubolso.blog.br)}{August 2017 – January 2019 / August 2019 - June 2020}{}
+Financial Edutech that connects companies and people through courses, podcasts and tools. Business model through affiliate programs and digital products.
+
+\justifying{I joined the team as a intern and was responsible for \textbf{\color{black}understanding the business from a tech perspective and helping build the business tools}. I quickly demonstrated skills of \textbf{\color{black}communication} and \textbf{\color{black}product development}, and was later hired. I \textbf{\color{black}built a platform in Django} to manage all our data and \textbf{\color{black}improve our tools, increasing efficiency for the marketing, commercial and technology teams}, as well as allowing for the business to grow faster. \textbf{\color{black}Developed strong communication skills} as this job required constant communication with the commercial team to translate the idea into a user friendly tool.}
+
+
+
+%\cvevent{Development of a Vocational Consulting Software}{}{January 2019 - December 2019}{}
+%\begin{itemize}
+%    \item Development in C\# of a software to automate some steps in the Vocational consulting process for Psychologist %Anamaria Jacques.
+%\end{itemize}
+
+
+
+
+%\cvsection{Other experiences}
+%\begin{itemize}
+%\item Development of the File System for \href{https://github.com/nanvix}{Nanvix Operating System}.
+%\item Setup and deploy of my personal email server.
+%\item Visual identity creation, development and deploy of the website for the Papo De Sauna podcast (\href{https://pds.luccaaugusto.xyz}{https://pds.luccaaugusto.xyz}).
+%\item Development of a small compiler (\href{https://github.com/lrr68/compiladorLP}{Compilador LP}).
+%\end{itemize}
+
+\clearpage
+
+
+
+%% If the NEXT page doesn't start with a \cvsection but you'd
+%% still like to add a sidebar, then use this command on THIS
+%% page to add it. The optional argument lets you pull up the 
+%% sidebar a bit so that it looks aligned with the top of the
+%% main column.
+% \addnextpagesidebar[-1ex]{page3sidebar}
+
+
+\end{document}
