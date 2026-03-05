@@ -1,0 +1,242 @@
+output_filename:
+  swe: "Lucca Augusto — Engenheiro de Software"
+  pm: "Lucca Augusto — Gerente de Projetos"
+
+title: "Lucca Augusto"
+name: "LUCCA AUGUSTO MOREIRA SANTOS"
+pm_title_suffix: "Gerente de Projetos"
+
+contacts:
+  email: { icon: "fa-solid fa-at icon", text: "lucca@luccaaugusto.xyz", url: "mailto:lucca@luccaaugusto.xyz" }
+  github: { icon: "fa-brands fa-github", text: "github.com/luccaugusto", url: "https://github.com/luccaugusto" }
+  linkedin: { icon: "fa-brands fa-linkedin-in", text: "linkedin.com/in/luccaugusto", url: "https://www.linkedin.com/in/luccaugusto/" }
+  website: { icon: "fa-solid fa-link", text: "https://dev.luccaaugusto.xyz", url: "https://dev.luccaaugusto.xyz" }
+  location: { icon: "fa-solid fa-location-dot", text: "Belo Horizonte, MG, Brasil" }
+  location_remote: { icon: "fa-solid fa-location-dot", text: "(Disponível para Remoto) Belo Horizonte, MG, Brasil" }
+  birthday: { icon: "fa-solid fa-cake-candles", text: "28/05/1999" }
+
+contact_items:
+  swe: [email, github, linkedin, website, location, birthday]
+  pm: [email, linkedin, location_remote, birthday, github]
+
+labels:
+  career_summary: "RESUMO DE CARREIRA"
+  professional_summary: "RESUMO PROFISSIONAL"
+  experience: "EXPERIÊNCIA PROFISSIONAL"
+  languages: "LINGUAGENS"
+  languages_pm: "IDIOMAS"
+  machine_languages: "De Máquina"
+  human_languages: "Humanas"
+  tech_skills: "HABILIDADES DE TECNOLOGIA"
+  pm_skills: "HABILIDADES DE PM"
+  soft_skills: "SOFT SKILLS"
+  education: "ESCOLARIDADE"
+  key_strengths: "PONTOS FORTES"
+  tools_methods: "FERRAMENTAS &amp; MÉTODOS"
+  technical_background: "FORMAÇÃO TÉCNICA"
+
+summary:
+  swe: >-
+    <b>Engenheiro de Software com habilidades gerais</b> experiente
+    em trabalhar com metodologias Agile, responsável por desenvolver e
+    manter soluções que dão base às equipes de marketing, business e
+    tecnologia, conseguindo antecipar problemas de crescimento,
+    necessidades executivas e desenvolver soluções que deêm autonomia a
+    todos os times possibilitando maior agilidade nas mudanças e
+    crescimento em qualquer parte do projeto. Experiência em Node.Js,
+    React, Python, PHP, Java, Javascript, SQL, HTML, CSS, Tailwind, Django,
+    Wordpress, C, Git, DevOps, GCP, AWS, AI, MCP, SQL.
+  pm: >-
+    Profissional orientado a produto com mais de 7 anos de experiência em ambientes de startup, combinando
+    sólida profundidade técnica com fluência em negócios. Experiente em liderar escopo de funcionalidades,
+    alinhamento de roadmap, colaboração entre times e entregas end-to-end. Background em desenvolvimento
+    full-stack possibilita avaliação técnica precisa, priorização realista e comunicação eficaz entre
+    times de engenharia, marketing e liderança.
+
+experience_order:
+  swe:
+    page1: [roadway]
+    page2: [cityshoppe, educando]
+  pm:
+    page1: [roadway]
+    page2: [sprinter, cityshoppe, educando]
+
+experiences:
+  roadway:
+    company: '<a href="https://roadwayai.com">RoadwayAI</a> através da <a href="https://nacif.xyz">NacifIT</a>'
+    date: "Fev 2024 - Presente"
+    location: "San Francisco-CA, US (Remoto)"
+    titles:
+      swe: "Engenheiro de Software Full Stack"
+      pm: "Engenheiro Técnico com Foco em Produto"
+    descriptions:
+      swe: |
+        <p>
+            A Roadway AI é uma startup de analytics e automação para Growth Marketing, com o propósito de <b>automatizar a metrificação,
+            modelagem e análise das métricas que realmente impulsionam o crescimento de empresas em escala</b>.
+            Atuando como engenheiro de software full stack (alocado pela NacifIT) em um time enxuto de quatro
+            engenheiros, trabalho no <b>desenvolvimento e manutenção de toda a plataforma</b>, abrangendo o Frontend
+            (ReactJS) para construção de dashboards, o Backend (Python FastAPI) responsável pela
+            orquestração dos dados e gestão dos dashboards, e a modelagem e transformação de dados dos
+            clientes utilizando SQL, dbt e uma camada semântica (<a href="https://cube.dev">Cube.dev</a>).
+            O projeto possui uma <b>forte camada de Inteligência Artificial</b>, que atua sobre os dados modelados
+            para <b>gerar relatórios analíticos detalhados e acionáveis</b>. Destaco como <b>contribuição principal o Attribution Manager</b>,
+            desenvolvido majoritariamente por mim, uma ferramenta que permite <b>gerenciar regras complexas de atribuição de
+            origem dos usuários com base em UTMs e histórico de navegação</b>.
+        </p>
+      pm: |
+        <p>
+            Startup de analytics e automação para growth marketing. Atuando em um time enxuto de quatro
+            engenheiros com envolvimento direto no planejamento e entrega de produto.
+        </p>
+        <ul>
+            <li>Defini escopo, priorizei e entregei analises orientadas por IA.</li>
+            <li>Liderei o <b>desenvolvimento end-to-end do Attribution Manager</b>, alinhando necessidades de marketing e engenharia, removendo overhead de engenharia e <b>economizando horas de trabalho em cada atualização</b>.</li>
+            <li>Contribuí para o <b>planejamento de roadmap e definição de funcionalidades em iterações rápidas</b>.</li>
+            <li>Liderei o <b>desenvolvimento end-to-end do login anônimo para demo do app</b>, permitindo que centenas de leads experimentassem o produto em primeira mão, <b>aumentando a confiança do comprador e acelerando a conversão</b>.</li>
+            <li>Apoiei a <b>tomada de decisão orientada por dados</b> ao melhorar a lógica de atribuição e workflows de automação.</li>
+        </ul>
+
+  sprinter:
+    company: '<a href="https://www.sprinterpecas.com.br/">Sprinter Peças</a>'
+    date: "Dez 2025 - Jan 2026"
+    location: "Belo Horizonte-MG, BR (Remoto)"
+    titles:
+      default: "Consultor de Tecnologia Freelancer"
+    descriptions:
+      default: |
+        <p>
+            Loja de peças e oficina de vans Sprinter. Contratado para projetar ferramentas para automatizar processos internos.
+        </p>
+        <ul>
+            <li><b>Conduzi todo o ciclo de vida do produto solo</b> — desde entrevistas com stakeholders e descoberta de problemas até design, desenvolvimento e deploy.</li>
+            <li>Automatizei workflows <b>eliminando mais de uma hora de trabalho repetitivo diário</b>.</li>
+            <li>Projetei <b>para usuários não técnicos</b>, permitindo que donos do negócio configurassem automações sem suporte de engenharia.</li>
+        </ul>
+
+  cityshoppe:
+    company: "CityShoppe"
+    date: "Junho 2021 - Maio 2023 "
+    location: "Austin-TX, US (Remoto)"
+    titles:
+      swe: "Engenheiro de Software Full Stack"
+      pm: "Engenheiro Full Stack com Responsabilidades de Product Owner"
+    descriptions:
+      swe: |
+        <p>
+            CityShoppe é um marketplace para pequenos negócios nos EUA e
+            Europa.
+            Sendo a segunda pessoa no time eu era responsável por entender por
+            completo o negócio e as tecnologias envolvidas, assim como <b>participar
+            de todas as decisões de desenvolvimento e na resolução de problemas</b>.
+            Eu também <b>participei ativamente na criação e desenvolvimento de
+            todos os produtos da empresa</b>, desenvolvendo funcionalidades
+            fundamentais e organizando a infraestrutura para garantir um sistema
+            confiável e disponível. Esses esforços resultaram em mais de <b>200 mil
+            dólares em investimento</b> para a empresa.
+            <br/>
+            Além disso,
+            <ul>
+                <li><b>Trabalhei com pessoas de 4 países diferentes no mesmo projeto</b>, desenvolvendo minhas habilidades de comunicação.</li>
+                <li>Desenvolvi produtos em NodeJS, NestJS and PHP, usando serviços AWS (lambda, API gateway, ECS, EC2, etc) para infraestrutura.</li>
+            </ul>
+        </p>
+      pm: |
+        <p>
+            Startup de marketplace digital (mercados dos EUA e UE). Membro inicial do time responsável por decisões técnicas
+            e evolução do produto.
+        </p>
+        <ul>
+            <li>Atuei como <b>parceiro técnico em decisões de produto e planejamento de arquitetura</b>.</li>
+            <li>Ajudei na transição da plataforma de WordPress para uma arquitetura escalável em NestJS.</li>
+            <li>Colaborei com <b>stakeholders e time cross-country em 4 países</b>.</li>
+            <li>Contribuí para a confiabilidade da infraestrutura, apoiando os esforços de captação de investimento (>$200k captados).</li>
+        </ul>
+
+  educando:
+    company: '<a href="https://educandoseubolso.blog.br">Educando Seu Bolso (https://educandoseubolso.blog.br)</a>'
+    date: "Ago 2017 – Jan 2019 / Ago 2019 - Jun 2020"
+    location: "BH-MG, Brasil"
+    titles:
+      default: "Engenheiro de Software Full Stack"
+    descriptions:
+      swe: |
+        <p>
+        Edutech financeira que conecta pessoas e empresas através de cursos,
+        podcasts e ferramentas com um modelo de negócio por programas de afiliados e
+        produtos digitais.
+        Entrei para o time como estagiário e era responsável por <b>entender o
+        negócio de uma perspectiva de tecnologia e contribuir na criação das
+        ferramentas</b>. Criei uma plataforma em Django para gerenciar todos os
+        dados e <b>melhorar nossas ferramentas, aumentando a eficiência dos
+        times de marketing, comercial e tecnologia</b>, permitindo o negócio
+        escalar mais rápido. Desenvolvi fortes habilidades de comunicação já
+        que esse trabalho envolvia comunicação constante com o time comercial
+        para traduzir a ideia do produto em uma ferramenta amigável ao usuário
+        </p>
+      pm: |
+        <p>
+        Edtech financeira brasileira que conecta empresas e pessoas através de cursos, podcasts e ferramentas.
+        </p>
+        <ul>
+            <li>Construí uma plataforma interna em Django para <b>apoiar operações de marketing e comerciais</b>.</li>
+            <li><b>Traduzi necessidades de negócio em soluções técnicas</b>, melhorando a eficiência operacional.</li>
+            <li><b>Trabalhei próximo a stakeholders não técnicos</b> para entregar ferramentas internas amigáveis ao usuário.</li>
+        </ul>
+
+human_languages:
+  - ["Inglês (fluente)", 5]
+  - ["Português (nativo)", 5]
+  - ["Japonês (básico)", 2]
+
+machine_languages: [C, Java, Python, PHP, JavaScript, TypeScript, Shell, Ruby, SQL]
+
+tech_skills:
+  - [SQL, 5]
+  - [Shell script, 5]
+  - [Linux, 5]
+  - [HTML, 5]
+  - [CSS/Tailwind, 5]
+  - [Git, 5]
+  - [FastAPI, 5]
+  - [ReactJS, 4]
+  - [Django, 4]
+  - [NodeJS, 4]
+  - [Ruby On Rails, 3]
+  - [GCP, 3]
+  - [AWS, 3]
+
+pm_skills:
+  - ["Gestão de expectativas", 5]
+  - [Agile / Scrum, 5]
+  - ["Comunicação entre times", 5]
+  - ["Escopo Técnico", 5]
+  - ["Entrega End-to-end", 5]
+  - ["Avaliação de Riscos", 5]
+  - ["Levantamento de Requisitos", 4]
+  - ["Planejamento de Roadmap", 4]
+
+soft_skills:
+  swe: [Comunicação, Tenacidade, "Resolução de problemas", "Trabalho em equipe", Criatividade, Resiliência]
+  pm: [Comunicação, Tenacidade, "Resolução de problemas", "Trabalho em equipe", Criatividade, Resiliência, "Escuta ativa", Adaptabilidade]
+
+tools_methods: [Agile / Scrum, Jira, Asana, Trello, Notion, Git / GitHub, Figma, Google Analytics, GCP, AWS, Sentry, Rollbar, SQL]
+
+key_strengths: |
+  <b>Penso como Dev:</b> Entendo como desenvolvedores pensam, o que me torna um comunicador mais eficaz e um melhor defensor de prazos realistas e trade-offs de qualidade ao trabalhar com times criativos e técnicos.
+  <br/><br/>
+  <b>Fluência em negócios:</b> Meu Curso Técnico em Administração e anos trabalhando em startups me dão uma visão clara de como decisões de tecnologia impactam estratégias de marketing e resultados de negócio.
+  <br/><br/>
+  <b>Adaptabilidade:</b> Sou proativo e confortável gerenciando projetos complexos com prioridades concorrentes em ambientes dinâmicos, conduzindo projetos com supervisão mínima.
+
+technical_background: >-
+  Experiência prática em todo o stack me dá a visão completa do problema, permitindo avaliar viabilidade técnica, escrever especificações precisas e ter conversas com credibilidade com times de engenharia, marketing e criativos.
+  Proficiências técnicas principais incluem <b>Python, JavaScript/TypeScript, ReactJS, Node.js, SQL, PHP, Java, Linux, HTML/CSS</b>, e plataformas cloud <b>(GCP, AWS)</b>. Familiarizado com DevOps, integrações de AI/LLM e ferramentas MCP.
+
+education:
+  - title: "Graduação em Ciência da Computação"
+    institution: "PUC Minas"
+    date: "Jan 2017 - Jun 2021"
+  - title: "Curso Técnico em Administração"
+    institution: "SEBRAE Contagem"
+    date: "Jan 2014 - Dez 2016"

@@ -1,0 +1,74 @@
+{% extends "base.njk" %}
+{% from "macros.njk" import contact_item, skill_row, experience_block, pill_list, education_entry %}
+
+{% block title %}{{ title }} — {{ pm_title_suffix }}{% endblock %}
+
+{% block body %}
+    <!-- PAGE 1 -->
+    <div class="page-container">
+        <div class="header">
+            <h1 style="margin-bottom: 12px; font-weight: 600">{{ name }}</h1>
+            <div class="contact-info">
+                {% for key in contact_items.pm %}
+                {{ contact_item(contacts[key]) }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">{{ labels.professional_summary }}</h1>
+                <p class="description">
+                    {{ summary.pm | safe }}
+                </p>
+                <h1 class="section-header">{{ labels.experience }}</h1>
+                {% for key in experience_order.pm.page1 %}
+                {{ experience_block(experiences[key], "pm") }}
+                {% endfor %}
+            </div>
+            <div class="sidebar">
+                <h1 class="section-header">{{ labels.languages_pm }}</h1>
+                <div class="skill-list">
+                    {% for lang in human_languages %}
+                    {{ skill_row(lang[0], lang[1]) }}
+                    {% endfor %}
+                </div>
+                <h1 class="section-header">{{ labels.pm_skills }}</h1>
+                <div class="skill-list">
+                    {% for skill in pm_skills %}
+                    {{ skill_row(skill[0], skill[1]) }}
+                    {% endfor %}
+                </div>
+                <h1 class="section-header">{{ labels.key_strengths }}</h1>
+                <p style="font-size: 13px; color: #4a4a4a; text-align: justify;">
+                    {{ key_strengths | safe }}
+                </p>
+                <h1 class="section-header">{{ labels.tools_methods }}</h1>
+                {{ pill_list(tools_methods) }}
+                <h1 class="section-header">{{ labels.soft_skills }}</h1>
+                {{ pill_list(soft_skills.pm) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page-container">
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">{{ labels.experience }}</h1>
+                {% for key in experience_order.pm.page2 %}
+                    {{ experience_block(experiences[key], "pm") }}
+                {% endfor %}
+            </div>
+            <div class="sidebar">
+                <h1 class="section-header">{{ labels.technical_background }}</h1>
+                <p style="font-size: 13px; color: #4a4a4a; text-align: justify;">
+                    {{ technical_background | safe }}
+                </p>
+                <h1 class="section-header">{{ labels.education }}</h1>
+                {% for edu in education %}
+                {{ education_entry(edu, loop.last) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

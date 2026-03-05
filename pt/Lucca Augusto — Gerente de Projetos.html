@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script src="https://kit.fontawesome.com/25199d3d0f.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: rgb(40, 40, 40);
+            font-family: sans-serif;
+        }
+        /* Link styling with subtle visual hints to indicate clickability */
+        a {
+            text-decoration: none;
+            color: #2a2a2a;
+            border-bottom: 1px dotted #6a6a6a;
+            transition: border-bottom-color 0.2s ease, color 0.2s ease;
+        }
+        /* Hover effect to make links more interactive */
+        a:hover {
+            color: #1a1a1a;
+            border-bottom-color: #4a4a4a;
+        }
+        /* A4 page container with exact height for proper pagination */
+        .page-container {
+            width: 210mm;
+            height: 297mm;
+            padding: 5mm 10mm;
+            margin: 10mm auto;
+            border: 1px #D3D3D3 solid;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+        /* Print media query for proper page breaks when printing */
+        @media print {
+            body {
+                background: white;
+            }
+            .page-container {
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page-container:last-child {
+                page-break-after: auto;
+            }
+            /* Ensure proficiency circles are visible and properly sized when printing */
+            .proficiency-circles .circle {
+                display: inline-block !important;
+                width: 13px !important;
+                height: 13px !important;
+                min-width: 13px !important;
+                min-height: 13px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            /* Ensure filled circles maintain their color when printing */
+            .proficiency-circles[data-level="1"] .circle:nth-child(-n+1),
+            .proficiency-circles[data-level="2"] .circle:nth-child(-n+2),
+            .proficiency-circles[data-level="3"] .circle:nth-child(-n+3),
+            .proficiency-circles[data-level="4"] .circle:nth-child(-n+4),
+            .proficiency-circles[data-level="5"] .circle:nth-child(-n+5) {
+                background-color: #4a4a4a !important;
+                border-color: #4a4a4a !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px 15px;
+            font-size: 12px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        .item i {
+            margin-right: 5px;
+        }
+        .icon {
+            color: #3b454a;
+        }
+        .cv-body {
+            display: flex;
+            width: 100%;
+        }
+        .content {
+            flex: 5.5;
+            padding-right: 25pt;
+        }
+        .sidebar {
+            flex: 3.5;
+        }
+        .section-header {
+            font-size: 28px;
+            font-weight: 600;
+            color: #5b5b5b;
+            border-bottom: 3px solid #5b5b5b;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+        .description {
+            text-align: justify;
+            font-size: 15px;
+        }
+        .subtitle {
+            font-weight: 550;
+            color: #4a4a4a;
+            font-size: 14px;
+        }
+        .pill-list {
+            font-weight: 500;
+            color: #4a4a4a;
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .pill-list li {
+            border-radius: 5px;
+            padding: 3px 6px;
+            font-size: 12px;
+            border: 1px solid #b8b8b8;
+        }
+        .skill-list {
+            margin-top: 8px;
+        }
+        .skill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .skill-name {
+            color: #4a4a4a;
+            font-weight: 600;
+        }
+        .proficiency-circles {
+            display: flex;
+            gap: 4px;
+        }
+        /* Circle styling with explicit display and print-friendly properties */
+        .proficiency-circles .circle {
+            width: 13px;
+            height: 13px;
+            min-width: 13px;
+            min-height: 13px;
+            border-radius: 50%;
+            background-color: #d0d0d0;
+            display: inline-block;
+            /* Ensure colors print correctly */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            /* Add border to ensure visibility even if background doesn't print */
+            border: 1px solid #d0d0d0;
+            box-sizing: border-box;
+        }
+        /* Filled circle style - applied based on data-level attribute */
+        /* Ensure filled circles print correctly with explicit color adjustment */
+        .proficiency-circles[data-level="1"] .circle:nth-child(-n+1),
+        .proficiency-circles[data-level="2"] .circle:nth-child(-n+2),
+        .proficiency-circles[data-level="3"] .circle:nth-child(-n+3),
+        .proficiency-circles[data-level="4"] .circle:nth-child(-n+4),
+        .proficiency-circles[data-level="5"] .circle:nth-child(-n+5) {
+            background-color: #4a4a4a;
+            border-color: #4a4a4a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .position {
+            font-size: 18px;
+            color: #404040;
+            font-weight: 600;
+        }
+        .location {
+            font-size: 16px;
+            color: #5a5a5a;
+        }
+        .date {
+            color: #6a6a6a;
+            font-size: 16px;
+        }
+        .split-list {
+            columns: 2;
+            column-gap: 1rem;
+            list-style: disc;
+            padding-left: 1.2rem;
+            margin: 0;
+            font-size: 18px;
+        }
+        .experience-block {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px dashed #d0d0d0;
+        }
+        .time-location {
+            display: flex;
+            gap: 15px;
+            margin-top: 4px;
+            font-size: 14px;
+            justify-content: space-between;
+        }
+    </style>
+    <title>Lucca Augusto — Gerente de Projetos</title>
+</head>
+<body>
+    
+    <!-- PAGE 1 -->
+    <div class="page-container">
+        <div class="header">
+            <h1 style="margin-bottom: 12px; font-weight: 600">LUCCA AUGUSTO MOREIRA SANTOS</h1>
+            <div class="contact-info">
+                
+                
+<div class="item">
+    <a href="mailto:lucca@luccaaugusto.xyz">
+        <i class="fa-solid fa-at icon"></i>lucca@luccaaugusto.xyz
+    </a>
+</div>
+
+                
+                
+<div class="item">
+    <a href="https://www.linkedin.com/in/luccaugusto/">
+        <i class="fa-brands fa-linkedin-in"></i>linkedin.com/in/luccaugusto
+    </a>
+</div>
+
+                
+                
+<div class="item">
+    <i class="fa-solid fa-location-dot"></i>(Disponível para Remoto) Belo Horizonte, MG, Brasil
+</div>
+
+                
+                
+<div class="item">
+    <i class="fa-solid fa-cake-candles"></i>28/05/1999
+</div>
+
+                
+                
+<div class="item">
+    <a href="https://github.com/luccaugusto">
+        <i class="fa-brands fa-github"></i>github.com/luccaugusto
+    </a>
+</div>
+
+                
+            </div>
+        </div>
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">RESUMO PROFISSIONAL</h1>
+                <p class="description">
+                    Profissional orientado a produto com mais de 7 anos de experiência em ambientes de startup, combinando sólida profundidade técnica com fluência em negócios. Experiente em liderar escopo de funcionalidades, alinhamento de roadmap, colaboração entre times e entregas end-to-end. Background em desenvolvimento full-stack possibilita avaliação técnica precisa, priorização realista e comunicação eficaz entre times de engenharia, marketing e liderança.
+                </p>
+                <h1 class="section-header">EXPERIÊNCIA PROFISSIONAL</h1>
+                
+                
+<div class="experience-block">
+    <span class="position">Engenheiro Técnico com Foco em Produto</span>
+    <span class="company"><a href="https://roadwayai.com">RoadwayAI</a> através da <a href="https://nacif.xyz">NacifIT</a></span>
+    <div class="time-location">
+        <span class="date"><i class="fa-regular fa-calendar-days"></i>Fev 2024 - Presente</span>
+        <span class="location"><i class="fa-solid fa-location-dot"></i>San Francisco-CA, US (Remoto)</span>
+    </div>
+	<div class="description">
+    	<p>
+    Startup de analytics e automação para growth marketing. Atuando em um time enxuto de quatro
+    engenheiros com envolvimento direto no planejamento e entrega de produto.
+</p>
+<ul>
+    <li>Defini escopo, priorizei e entregei analises orientadas por IA.</li>
+    <li>Liderei o <b>desenvolvimento end-to-end do Attribution Manager</b>, alinhando necessidades de marketing e engenharia, removendo overhead de engenharia e <b>economizando horas de trabalho em cada atualização</b>.</li>
+    <li>Contribuí para o <b>planejamento de roadmap e definição de funcionalidades em iterações rápidas</b>.</li>
+    <li>Liderei o <b>desenvolvimento end-to-end do login anônimo para demo do app</b>, permitindo que centenas de leads experimentassem o produto em primeira mão, <b>aumentando a confiança do comprador e acelerando a conversão</b>.</li>
+    <li>Apoiei a <b>tomada de decisão orientada por dados</b> ao melhorar a lógica de atribuição e workflows de automação.</li>
+</ul>
+
+	</div>
+</div>
+
+                
+            </div>
+            <div class="sidebar">
+                <h1 class="section-header">IDIOMAS</h1>
+                <div class="skill-list">
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Inglês (fluente)</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Português (nativo)</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Japonês (básico)</span>
+    <div class="proficiency-circles" data-level="2">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                </div>
+                <h1 class="section-header">HABILIDADES DE PM</h1>
+                <div class="skill-list">
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Gestão de expectativas</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Agile / Scrum</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Comunicação entre times</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Escopo Técnico</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Entrega End-to-end</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Avaliação de Riscos</span>
+    <div class="proficiency-circles" data-level="5">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Levantamento de Requisitos</span>
+    <div class="proficiency-circles" data-level="4">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                    
+<div class="skill-row">
+    <span class="skill-name">Planejamento de Roadmap</span>
+    <div class="proficiency-circles" data-level="4">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+
+                    
+                </div>
+                <h1 class="section-header">PONTOS FORTES</h1>
+                <p style="font-size: 13px; color: #4a4a4a; text-align: justify;">
+                    <b>Penso como Dev:</b> Entendo como desenvolvedores pensam, o que me torna um comunicador mais eficaz e um melhor defensor de prazos realistas e trade-offs de qualidade ao trabalhar com times criativos e técnicos.
+<br/><br/>
+<b>Fluência em negócios:</b> Meu Curso Técnico em Administração e anos trabalhando em startups me dão uma visão clara de como decisões de tecnologia impactam estratégias de marketing e resultados de negócio.
+<br/><br/>
+<b>Adaptabilidade:</b> Sou proativo e confortável gerenciando projetos complexos com prioridades concorrentes em ambientes dinâmicos, conduzindo projetos com supervisão mínima.
+
+                </p>
+                <h1 class="section-header">FERRAMENTAS &amp; MÉTODOS</h1>
+                
+<div class="pill-list">
+    <li>Agile / Scrum</li>
+    <li>Jira</li>
+    <li>Asana</li>
+    <li>Trello</li>
+    <li>Notion</li>
+    <li>Git / GitHub</li>
+    <li>Figma</li>
+    <li>Google Analytics</li>
+    <li>GCP</li>
+    <li>AWS</li>
+    <li>Sentry</li>
+    <li>Rollbar</li>
+    <li>SQL</li>
+    
+</div>
+
+                <h1 class="section-header">SOFT SKILLS</h1>
+                
+<div class="pill-list">
+    <li>Comunicação</li>
+    <li>Tenacidade</li>
+    <li>Resolução de problemas</li>
+    <li>Trabalho em equipe</li>
+    <li>Criatividade</li>
+    <li>Resiliência</li>
+    <li>Escuta ativa</li>
+    <li>Adaptabilidade</li>
+    
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page-container">
+        <div class="cv-body">
+            <div class="content">
+                <h1 class="section-header">EXPERIÊNCIA PROFISSIONAL</h1>
+                
+                    
+<div class="experience-block">
+    <span class="position">Consultor de Tecnologia Freelancer</span>
+    <span class="company"><a href="https://www.sprinterpecas.com.br/">Sprinter Peças</a></span>
+    <div class="time-location">
+        <span class="date"><i class="fa-regular fa-calendar-days"></i>Dez 2025 - Jan 2026</span>
+        <span class="location"><i class="fa-solid fa-location-dot"></i>Belo Horizonte-MG, BR (Remoto)</span>
+    </div>
+	<div class="description">
+    	<p>
+    Loja de peças e oficina de vans Sprinter. Contratado para projetar ferramentas para automatizar processos internos.
+</p>
+<ul>
+    <li><b>Conduzi todo o ciclo de vida do produto solo</b> — desde entrevistas com stakeholders e descoberta de problemas até design, desenvolvimento e deploy.</li>
+    <li>Automatizei workflows <b>eliminando mais de uma hora de trabalho repetitivo diário</b>.</li>
+    <li>Projetei <b>para usuários não técnicos</b>, permitindo que donos do negócio configurassem automações sem suporte de engenharia.</li>
+</ul>
+
+	</div>
+</div>
+
+                
+                    
+<div class="experience-block">
+    <span class="position">Engenheiro Full Stack com Responsabilidades de Product Owner</span>
+    <span class="company">CityShoppe</span>
+    <div class="time-location">
+        <span class="date"><i class="fa-regular fa-calendar-days"></i>Junho 2021 - Maio 2023 </span>
+        <span class="location"><i class="fa-solid fa-location-dot"></i>Austin-TX, US (Remoto)</span>
+    </div>
+	<div class="description">
+    	<p>
+    Startup de marketplace digital (mercados dos EUA e UE). Membro inicial do time responsável por decisões técnicas
+    e evolução do produto.
+</p>
+<ul>
+    <li>Atuei como <b>parceiro técnico em decisões de produto e planejamento de arquitetura</b>.</li>
+    <li>Ajudei na transição da plataforma de WordPress para uma arquitetura escalável em NestJS.</li>
+    <li>Colaborei com <b>stakeholders e time cross-country em 4 países</b>.</li>
+    <li>Contribuí para a confiabilidade da infraestrutura, apoiando os esforços de captação de investimento (>$200k captados).</li>
+</ul>
+
+	</div>
+</div>
+
+                
+                    
+<div class="experience-block">
+    <span class="position">Engenheiro de Software Full Stack</span>
+    <span class="company"><a href="https://educandoseubolso.blog.br">Educando Seu Bolso (https://educandoseubolso.blog.br)</a></span>
+    <div class="time-location">
+        <span class="date"><i class="fa-regular fa-calendar-days"></i>Ago 2017 – Jan 2019 / Ago 2019 - Jun 2020</span>
+        <span class="location"><i class="fa-solid fa-location-dot"></i>BH-MG, Brasil</span>
+    </div>
+	<div class="description">
+    	<p>
+Edtech financeira brasileira que conecta empresas e pessoas através de cursos, podcasts e ferramentas.
+</p>
+<ul>
+    <li>Construí uma plataforma interna em Django para <b>apoiar operações de marketing e comerciais</b>.</li>
+    <li><b>Traduzi necessidades de negócio em soluções técnicas</b>, melhorando a eficiência operacional.</li>
+    <li><b>Trabalhei próximo a stakeholders não técnicos</b> para entregar ferramentas internas amigáveis ao usuário.</li>
+</ul>
+
+	</div>
+</div>
+
+                
+            </div>
+            <div class="sidebar">
+                <h1 class="section-header">FORMAÇÃO TÉCNICA</h1>
+                <p style="font-size: 13px; color: #4a4a4a; text-align: justify;">
+                    Experiência prática em todo o stack me dá a visão completa do problema, permitindo avaliar viabilidade técnica, escrever especificações precisas e ter conversas com credibilidade com times de engenharia, marketing e criativos. Proficiências técnicas principais incluem <b>Python, JavaScript/TypeScript, ReactJS, Node.js, SQL, PHP, Java, Linux, HTML/CSS</b>, e plataformas cloud <b>(GCP, AWS)</b>. Familiarizado com DevOps, integrações de AI/LLM e ferramentas MCP.
+                </p>
+                <h1 class="section-header">ESCOLARIDADE</h1>
+                
+                
+<div style="display: flex; flex-direction: column; gap: 3px; margin-bottom: 12px;">
+    <span class="position">Graduação em Ciência da Computação</span>
+    <span class="location"><i class="fa-solid fa-location-dot"></i>PUC Minas</span>
+    <span class="date"><i class="fa-regular fa-calendar-days"></i>Jan 2017 - Jun 2021</span>
+</div>
+
+                
+                
+<div style="display: flex; flex-direction: column; gap: 3px;">
+    <span class="position">Curso Técnico em Administração</span>
+    <span class="location"><i class="fa-solid fa-location-dot"></i>SEBRAE Contagem</span>
+    <span class="date"><i class="fa-regular fa-calendar-days"></i>Jan 2014 - Dez 2016</span>
+</div>
+
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% macro contact_item(item) %}
+<div class="item">
+    {% if item.url %}<a href="{{ item.url }}">
+        <i class="{{ item.icon }}"></i>{{ item.text }}
+    </a>{% else %}<i class="{{ item.icon }}"></i>{{ item.text }}{% endif %}
+</div>
+{% endmacro %}
+
+{% macro skill_row(name, level) %}
+<div class="skill-row">
+    <span class="skill-name">{{ name }}</span>
+    <div class="proficiency-circles" data-level="{{ level }}">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro experience_block(exp, variant) %}
+<div class="experience-block">
+    <span class="position">{{ exp.titles[variant] or exp.titles.default }}</span>
+    <span class="company">{{ exp.company | safe }}</span>
+    <div class="time-location">
+        <span class="date"><i class="fa-regular fa-calendar-days"></i>{{ exp.date }}</span>
+        <span class="location"><i class="fa-solid fa-location-dot"></i>{{ exp.location }}</span>
+    </div>
+	<div class="description">
+    	{{ (exp.descriptions[variant] or exp.descriptions.default) | safe }}
+	</div>
+</div>
+{% endmacro %}
+
+{% macro pill_list(items) %}
+<div class="pill-list">
+    {% for item in items %}<li>{{ item }}</li>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro education_entry(edu, last) %}
+<div style="display: flex; flex-direction: column; gap: 3px;{% if not last %} margin-bottom: 12px;{% endif %}">
+    <span class="position">{{ edu.title }}</span>
+    <span class="location"><i class="fa-solid fa-location-dot"></i>{{ edu.institution }}</span>
+    <span class="date"><i class="fa-regular fa-calendar-days"></i>{{ edu.date }}</span>
+</div>
+{% endmacro %}
